@@ -16,7 +16,7 @@ public class BbsCtrl {
     @Autowired
     private BbsSvc bbsSvc;
 
-    @GetMapping("/bbs/bbsList")
+    @GetMapping("/bbs/list")
     public ModelAndView bbsList(){
         ModelAndView mav = new ModelAndView();
 
@@ -24,6 +24,13 @@ public class BbsCtrl {
         list = bbsSvc.selectBbsList();
 
         System.out.println(list);
+        return mav;
+    }
+
+    @GetMapping("/bbs/join")
+    public ModelAndView bbsJoin(){
+        ModelAndView mav = new ModelAndView();
+
         return mav;
     }
 }
