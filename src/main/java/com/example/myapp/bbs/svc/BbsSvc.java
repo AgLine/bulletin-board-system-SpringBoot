@@ -17,4 +17,8 @@ public interface BbsSvc {
      */
     void userInsert(UserVO userVO);
 
+    /*
+    ID 중복체크
+    */
+    int idCnt(UserVO userVO);
 }

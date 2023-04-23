@@ -22,8 +22,20 @@ public class BbsSvcImpl implements BbsSvc {
         return bbsMapper.bbsSelectList();
     }
 
+    /*
+    회원정보 Insert
+    */
     @Override
     public void userInsert(UserVO userVO) {
         bbsMapper.userInsert(userVO);
+    }
+
+    /*
+    ID 중복체크
+    */
+    @Override
+    public int idCnt(UserVO userVO){
+
+        return bbsMapper.idCnt(userVO);
     }
 }

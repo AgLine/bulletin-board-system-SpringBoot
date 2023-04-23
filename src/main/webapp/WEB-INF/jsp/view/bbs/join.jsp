@@ -14,9 +14,8 @@
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 <script type="text/javascript">
-function fn_click(){
+function fn_joinClick(){
     var parameters = $("#frm").serialize();
-    console.log(parameters);
     $.ajax({
         type:"post",
         dataType:"json",
@@ -24,7 +23,20 @@ function fn_click(){
         url:"<c:url value='/bbs/joinInsert'/>",
         data:parameters ,
         success:function(data){
-            console.log("성공");
+        }
+    });
+}
+
+function fn_idClick(){
+    var parameters = $("#frm").serialize();
+    $.ajax({
+        type:"post",
+        dataType:"json",
+        async:false,
+        url:"<c:url value='/bbs/idCheck'/>",
+        data:parameters ,
+        success:function(data){
+            alert(data.result);
         }
     });
 }
@@ -63,7 +75,7 @@ function fn_click(){
                                                 </div>
                                             </div>
                                             <div class="mt-4 mb-0">
-                                                <div class="d-grid"><button onclick="" class="btn btn-primary btn-block">id check</button></div>
+                                                <div class="d-grid"><button onclick="fn_idClick();" class="btn btn-primary btn-block">id check</button></div>
                                             </div>
                                         </div>
                                         <div class="form-floating mb-3">
@@ -85,7 +97,7 @@ function fn_click(){
                                             </div>
                                         </div>
                                         <div class="mt-4 mb-0">
-                                            <div class="d-grid"><button onclick="fn_click();" class="btn btn-primary btn-block">Create Account</button></div>
+                                            <div class="d-grid"><button onclick="fn_joinClick();" class="btn btn-primary btn-block">Create Account</button></div>
                                         </div>
                                     </form>
                                 </div>

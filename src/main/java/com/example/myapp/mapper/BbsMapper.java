@@ -17,4 +17,9 @@ public interface BbsMapper {
     회원정보 Insert
      */
     void userInsert(UserVO userVO);
+
+    /*
+    ID 중복체크
+    */
+    int idCnt(UserVO userVO);
 }

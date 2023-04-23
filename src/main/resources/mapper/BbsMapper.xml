@@ -27,4 +27,11 @@
              , #{userEmail}
              )
     </insert>
+
+    <!--user ID cnt -->
+    <select id="idCnt" resultType="int">
+        SELECT COUNT(*)
+          FROM USER
+         WHERE userId = #{userID}
+    </select>
 </mapper>

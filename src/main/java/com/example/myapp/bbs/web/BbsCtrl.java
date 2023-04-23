@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class BbsCtrl {
@@ -44,14 +46,35 @@ public class BbsCtrl {
 
     /*
     회원정보 Insert
-     */
+    */
+    @ResponseBody
     @PostMapping("/bbs/joinInsert")
     public void joinInsert(UserVO userVO){
 
         bbsSvc.userInsert(userVO);
+        /*
         System.out.println(userVO.getUserID());
         System.out.println(userVO.getUserEmail());
         System.out.println(userVO.getUserName());
         System.out.println(userVO.getUserPwd());
+        */
     }
+
+    /*
+    ID 중복체크
+    */
+    @ResponseBody
+    @PostMapping("/bbs/idCheck")
+    public Map<String, Object> idCheck(UserVO userVO){
+
+        Map<String, Object> resultMap = new HashMap<>();
+        if(1 == bbsSvc.idCnt(userVO)){
+            resultMap.put("result", "중복된 아이디 입니다.");
+        }else{
+            resultMap.put("result", "사용가능한 아이디 입니다.");
+        }
+
+        return resultMap;
+    }
+
 }
