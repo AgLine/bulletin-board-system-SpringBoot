@@ -8,13 +8,43 @@
 <meta name="viewport" content="width=device-width", initial-scale="1">
 
 <!--bootstrap -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="/css/styles.css" rel="stylesheet" />
 <!-- jquery -->
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 <script type="text/javascript">
 function fn_joinClick(){
+    if($("#userName").val() == ""){
+        alert("이름을 입력해주세요");
+        return;
+    }
+
+    if($("#userID").val() == ""){
+        alert("아이디를 입력해주세요");
+        return;
+    }
+
+    if($("#userEmail").val() == ""){
+        alert("이메일을 입력해주세요");
+        return;
+    }
+
+    if($("#userPwd").val() == ""){
+        alert("비밀번호를 입력해주세요");
+        return;
+    }
+
+    if($("#userPwd").val() != $("#userPwdRe").val()){
+        alert("비밀번호를 다시 입력해주세요");
+        return;
+    }
+
+    if(document.getElementById("idDuplication").value == 'idUnCheck'){
+        alert("아이디 중복체크를 해주세요.");
+        return;
+    }
+
     var parameters = $("#frm").serialize();
     $.ajax({
         type:"post",
@@ -23,6 +53,8 @@ function fn_joinClick(){
         url:"<c:url value='/bbs/joinInsert'/>",
         data:parameters ,
         success:function(data){
+            alert(data.result);
+            location.href = "/bbs/list";
         }
     });
 }
@@ -36,7 +68,12 @@ function fn_idClick(){
         url:"<c:url value='/bbs/idCheck'/>",
         data:parameters ,
         success:function(data){
-            alert(data.result);
+            if(data.result == 'false'){
+                alert("중복된 아이디입니다.");
+            }else{
+                document.getElementById("idDuplication").value="idCheck";
+                alert("사용 가능한 아이디 입니다.");
+            }
         }
     });
 }
@@ -48,12 +85,13 @@ function fn_idClick(){
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Register</title>
-        <link href="css/styles.css" rel="stylesheet" />
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <link href="./resources/css/styles.css" rel="stylesheet" />
+
 </head>
 <body class="bg-primary">
     <div id="layoutAuthentication">
         <div id="layoutAuthentication_content">
+            <main>
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-lg-7">
@@ -71,6 +109,7 @@ function fn_idClick(){
                                             <div class="col-md-6">
                                                 <div class="form-floating">
                                                     <input class="form-control" id="userID" name="userID" type="text" placeholder="Enter your ID" />
+                                                    <input type="hidden" id="idDuplication" name="idDuplication" value="idUnCheck"/>
                                                     <label for="inputID">ID</label>
                                                 </div>
                                             </div>
@@ -91,7 +130,7 @@ function fn_idClick(){
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3 mb-md-0">
-                                                    <input class="form-control" id="userPwdRe" type="password" placeholder="Confirm password">
+                                                    <input class="form-control" id="userPwdRe" name="userPwdRe" type="password" placeholder="Confirm password">
                                                     <label for="inputPasswordConfirm">Confirm Password</label>
                                                 </div>
                                             </div>
@@ -108,23 +147,15 @@ function fn_idClick(){
                         </div>
                     </div>
                 </div>
-        </div>
-        <div id="layoutAuthentication_footer">
-            <footer class="py-4 bg-light mt-auto">
-                <div class="container-fluid px-4">
-                    <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Your Website 2023</div>
-                        <div>
-                            <a href="#">Privacy Policy</a>
-                            &middot;
-                            <a href="#">Terms &amp; Conditions</a>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            </main>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+    <script src="/js/scripts.js"></script>
+    <script src="/assets/demo/chart-area-demo.js"></script>
+    <script src="/assets/demo/chart-bar-demo.js"></script>
+    <script src="/js/datatables-simple-demo.js"></script>
 </body>
 
