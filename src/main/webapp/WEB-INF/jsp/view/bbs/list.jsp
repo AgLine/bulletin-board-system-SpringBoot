@@ -17,9 +17,27 @@
     <link href="/css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-
+    $.ajax({
+        type:"post",
+        dataType:"json",
+        async:false,
+        url:"<c:url value='/bbs/loginCheck'/>",
+        success:function(data){
+            var addHtml='';
+            if(data.result == "N"){
+                addHtml += '<li><a class="dropdown-item" href="/bbs/login">로그인</a></li>';
+                addHtml += '<li><a class="dropdown-item" href="/bbs/join">회원가입</a></li>';
+                $("#loginCheck").append(addHtml);
+            }else{
+                addHtml += '<li><a class="dropdown-item">'+data.result+'</a></li>';
+                addHtml += '<li><a class="dropdown-item" href="/bbs/join">로그아웃</a></li>';
+                $("#loginCheck").append(addHtml);
+            }
+        }
+    });
 });
 </script>
 
@@ -29,52 +47,35 @@ $(document).ready(function(){
       <ul class="nav nav-pills">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">접속하기</a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">로그인</a></li>
-            <li><a class="dropdown-item" href="#">회원가입</a></li>
+          <ul name="loginCheck" id="loginCheck"class="dropdown-menu">
+
           </ul>
         </li>
       </ul>
     </nav>
 </div>
-<div class="container-fluid px-4">
-<h1 class="mt-4">Tables</h1>
-<ol class="breadcrumb mb-4">
-    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-    <li class="breadcrumb-item active">Tables</li>
-</ol>
-<div class="card mb-4">
-    <div class="card-body">
-        DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the
-        <a target="_blank" href="https://datatables.net/">official DataTables documentation</a>
-        .
-    </div>
-</div>
+
 <div class="card mb-4">
     <div class="card-header">
         <i class="fas fa-table me-1"></i>
-        DataTable Example
+        List
     </div>
     <div class="card-body">
         <table id="datatablesSimple">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th>Office</th>
-                    <th>Age</th>
-                    <th>Start date</th>
-                    <th>Salary</th>
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>작성일자</th>
                 </tr>
             </thead>
             <tfoot>
                 <tr>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th>Office</th>
-                    <th>Age</th>
-                    <th>Start date</th>
-                    <th>Salary</th>
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>작성일자</th>
                 </tr>
             </tfoot>
             <tbody>
@@ -83,8 +84,6 @@ $(document).ready(function(){
                     <td>System Architect</td>
                     <td>Edinburgh</td>
                     <td>61</td>
-                    <td>2011/04/25</td>
-                    <td>$320,800</td>
                 </tr>
             </tbody>
         </table>

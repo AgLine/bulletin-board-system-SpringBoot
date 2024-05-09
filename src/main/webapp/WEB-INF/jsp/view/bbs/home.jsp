@@ -5,6 +5,14 @@
 <%@ taglib prefix="form" 		uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" 		uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<script type="text/javascript">
+$(document).ready(function(){
+
+});
+
+
+</script>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>

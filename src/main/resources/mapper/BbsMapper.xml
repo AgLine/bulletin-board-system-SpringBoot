@@ -15,10 +15,10 @@
     <!--user insert-->
     <insert id="userInsert">
         INSERT INTO USER
-             ( USERNAME
-             , USERID
-             , USERPWD
-             , USEREMAIL
+             ( NAME
+             , ID
+             , PWD
+             , EMAIL
              )
         VALUES
              ( #{userName}
@@ -32,6 +32,6 @@
     <select id="idCnt" resultType="int">
         SELECT COUNT(*)
           FROM USER
-         WHERE userId = #{userID}
+         WHERE id = #{userID}
     </select>
 </mapper>

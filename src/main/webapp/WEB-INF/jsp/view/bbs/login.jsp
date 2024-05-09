@@ -13,6 +13,39 @@
 <!-- jquery -->
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 
+<script type="text/javascript">
+function fn_loginClick(){
+    if($("#userId").val() == ""){
+        alert("아이디를 입력해주세요");
+        return;
+    }
+
+    if($("#userPwd").val() == ""){
+        alert("비밀번호를 입력해주세요");
+        return;
+    }
+
+    var parameters = $("#frm").serialize();
+    $.ajax({
+        type:"post",
+        dataType:"json",
+        async:false,
+        url:"<c:url value='/bbs/loginAction'/>",
+        data:parameters ,
+        success:function(data){
+            if(data.result == "Y"){
+                location.href = "/bbs/list";
+            }else{
+                alert(data.result);
+            }
+        }
+    });
+}
+
+$(document).ready(function(){
+
+});
+</script>
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -32,17 +65,17 @@
                             <div class="card shadow-lg border-0 rounded-lg mt-5">
                                 <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
                                 <div class="card-body">
-                                    <form>
+                                    <form name="frm" id="frm" method="get" onsubmit="return false;">
                                         <div class="form-floating mb-3">
-                                            <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" />
+                                            <input class="form-control" id="userId" name="userId" placeholder="ID"/>
                                             <label for="inputEmail">ID</label>
                                         </div>
                                         <div class="form-floating mb-3">
-                                            <input class="form-control" id="inputPassword" type="password" placeholder="Password" />
+                                            <input class="form-control" id="userPwd" name="userPwd" type="password" placeholder="Password" />
                                             <label for="inputPassword">Password</label>
                                         </div>
                                         <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                            <a class="btn btn-primary" href="index.html">Login</a>
+                                            <button onclick="fn_loginClick();" class="btn btn-primary btn-block">Login</button>
                                         </div>
                                     </form>
                                 </div>
@@ -57,7 +90,6 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="js/scripts.js"></script>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>

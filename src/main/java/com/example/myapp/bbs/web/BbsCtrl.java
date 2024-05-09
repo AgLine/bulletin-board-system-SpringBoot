@@ -3,7 +3,6 @@ package com.example.myapp.bbs.web;
 import com.example.myapp.bbs.svc.BbsSvc;
 import com.example.myapp.bbs.vo.BbsVO;
 import com.example.myapp.bbs.vo.UserVO;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -27,10 +26,13 @@ public class BbsCtrl {
     public ModelAndView bbsList(){
         ModelAndView mav = new ModelAndView();
 
+
+        /*
         List<BbsVO> list = new ArrayList<>();
         list = bbsSvc.selectBbsList();
 
         System.out.println(list);
+        */
         return mav;
     }
 
@@ -49,9 +51,13 @@ public class BbsCtrl {
     */
     @ResponseBody
     @PostMapping("/bbs/joinInsert")
-    public void joinInsert(UserVO userVO){
+    public Map<String, Object> joinInsert(UserVO userVO){
 
         bbsSvc.userInsert(userVO);
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("result","회원가입이 완료되었습니다.");
+
+        return resultMap;
         /*
         System.out.println(userVO.getUserID());
         System.out.println(userVO.getUserEmail());
@@ -69,12 +75,29 @@ public class BbsCtrl {
 
         Map<String, Object> resultMap = new HashMap<>();
         if(1 == bbsSvc.idCnt(userVO)){
-            resultMap.put("result", "중복된 아이디 입니다.");
+            resultMap.put("result", "false");
         }else{
-            resultMap.put("result", "사용가능한 아이디 입니다.");
+            resultMap.put("result", "true");
         }
 
         return resultMap;
+    }
+
+    /*
+    글작성 페이지
+    */
+    @GetMapping("/bbs/write")
+    public ModelAndView bbsWrite(){
+        ModelAndView mav = new ModelAndView();
+
+
+        return mav;
+    }
+    @GetMapping("/bbs/home")
+    public ModelAndView home(){
+        ModelAndView mav = new ModelAndView();
+
+        return mav;
     }
 
 }

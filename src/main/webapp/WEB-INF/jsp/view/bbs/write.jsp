@@ -12,15 +12,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Tables - SB Admin</title>
+    <title>글작성</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 <script type="text/javascript">
-$(document).ready(function(){
-
-});
+function fn_writeClick(){
+    if($("#bbsTitle").val() == ""){
+        alert("제목을 입력해주세요");
+        return;
+    }
+    if($("#bbsContent").val() == ""){
+        alert("내용을 입력해주세요");
+        return;
+    }
+    var parameters = $("#frm").serialize();
+    $.ajax({
+        type:"post",
+        dataType:"json",
+        async:false,
+        url:"<c:url value='/bbs/writeInsert'/>",
+        data:parameters ,
+        success:function(data){
+            alert(data.result);
+            location.href = "/bbs/list";
+        }
+    });
+}
 </script>
 <body class="bg-primary">
     <div id="layoutAuthentication">
@@ -31,11 +50,11 @@ $(document).ready(function(){
                         <div class="col-lg-7">
                             <div class="card shadow-lg border-0 rounded-lg mt-5">
                                 <form class="form-horizontal" name="frm" id="frm" method="get" onsubmit="return false;">
-                                <div class="card-header"><input class="form-control" id="userName" name="userName" type="text" placeholder="제목을 입력해주세요" value="${searchVO.userName}"></div>
+                                <div class="card-header"><input class="form-control" id="bbsTitle" name="bbsTitle" type="text" placeholder="제목을 입력해주세요" value="${searchVO.bbsTitle}"></div>
                                 <div class="card-body">
-                                    <textarea class="form-control" rows="10" placeholder="내용을 입력해주세요"></textarea>
+                                    <textarea class="form-control" id="bbsContent" name="bbsContent" rows="10" placeholder="내용을 입력해주세요"></textarea>
                                     <div class="mt-4 mb-0">
-                                        <div class="d-grid"><button onclick="fn_joinClick();" class="btn btn-primary btn-block">작성</button></div>
+                                        <div class="d-grid"><button onclick="fn_writeClick();" class="btn btn-primary btn-block">작성</button></div>
                                     </div>
                                 </div>
                                 </form>
