@@ -9,5 +9,6 @@ public class BbsVO {
     private String bbsContent;
     private String bbsTitle;
     private String bbsDate;
+    private String bbsName;
     private Integer bbsAvailable;
 }

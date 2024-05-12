@@ -17,6 +17,7 @@
     <link href="/css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script type="text/javascript">
 function fn_writeClick(){
     if($("#bbsTitle").val() == ""){
@@ -32,11 +33,11 @@ function fn_writeClick(){
         type:"post",
         dataType:"json",
         async:false,
-        url:"<c:url value='/bbs/writeInsert'/>",
+        url:"<c:url value='/bbs/writeAction'/>",
         data:parameters ,
         success:function(data){
             alert(data.result);
-            location.href = "/bbs/list";
+            //location.href = "/bbs/list";
         }
     });
 }

@@ -3,6 +3,8 @@ package com.example.myapp.bbs.web;
 import com.example.myapp.bbs.svc.BbsSvc;
 import com.example.myapp.bbs.vo.BbsVO;
 import com.example.myapp.bbs.vo.UserVO;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -93,6 +95,26 @@ public class BbsCtrl {
 
         return mav;
     }
+
+    /*
+    글작성기능
+    */
+    @ResponseBody
+    @PostMapping("/bbs/writeAction")
+    public Map<String, Object> writeAction(HttpServletRequest request,BbsVO bbsVO){
+        Map<String, Object> resultMap = new HashMap<>();
+
+        HttpSession session = request.getSession();
+        String name = (String)session.getAttribute("userId");
+
+        bbsVO.setBbsName(name);
+        bbsSvc.writeInsert(bbsVO);
+        //System.out.println(bbsVO);
+        return resultMap;
+    }
+    /*
+    부트스트랩 테스트페이지
+    */
     @GetMapping("/bbs/home")
     public ModelAndView home(){
         ModelAndView mav = new ModelAndView();

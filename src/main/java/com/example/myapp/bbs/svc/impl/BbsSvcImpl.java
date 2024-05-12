@@ -38,4 +38,10 @@ public class BbsSvcImpl implements BbsSvc {
 
         return bbsMapper.idCnt(userVO);
     }
+
+    /*
+    게시글 Insert
+    */
+    @Override
+    public void writeInsert(BbsVO bbsVO){bbsMapper.writeInsert(bbsVO);}
 }

@@ -34,4 +34,26 @@
           FROM USER
          WHERE id = #{userID}
     </select>
+
+    <!--write insert-->
+    <insert id="writeInsert">
+        INSERT INTO BBS
+        ( ID
+        , TITLE
+        , CONTENT
+        , DATE
+        , NAME
+        , AVAILABLE
+        )
+        VALUES
+        ( (SELECT COUNT(*)+1
+             FROM BBS ALIAS_FOR_SUBQUERY
+          )
+        , #{bbsTitle}
+        , #{bbsContent}
+        , NOW()
+        , #{bbsName}
+        , 1
+        )
+    </insert>
 </mapper>

@@ -39,6 +39,23 @@ $(document).ready(function(){
         }
     });
 });
+
+function fn_writeClick(){
+    $.ajax({
+        type:"post",
+        dataType:"json",
+        async:false,
+        url:"<c:url value='/bbs/loginCheck'/>",
+        success:function(data){
+            var addHtml='';
+            if(data.result == "N"){
+                alert("로그인이 필요한 기능입니다.");
+            }else{
+                location.href = "/bbs/write";
+            }
+        }
+    });
+}
 </script>
 
 <div class="container">
@@ -87,6 +104,7 @@ $(document).ready(function(){
                 </tr>
             </tbody>
         </table>
+        <button onclick="fn_writeClick();" class="btn btn-primary btn-block">글쓰기</button>
     </div>
 </div>
 

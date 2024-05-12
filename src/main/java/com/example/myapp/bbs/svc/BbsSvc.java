@@ -21,4 +21,9 @@ public interface BbsSvc {
     ID 중복체크
     */
     int idCnt(UserVO userVO);
+
+    /*
+    게시글 Insert
+    */
+    void writeInsert(BbsVO bbsVO);
 }
