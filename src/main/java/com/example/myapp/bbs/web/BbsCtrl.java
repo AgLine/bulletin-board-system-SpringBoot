@@ -28,6 +28,7 @@ public class BbsCtrl {
     public ModelAndView bbsList(){
         ModelAndView mav = new ModelAndView();
 
+        mav.addObject("resultList",bbsSvc.selectBbsList());
 
         /*
         List<BbsVO> list = new ArrayList<>();
@@ -35,6 +36,7 @@ public class BbsCtrl {
 
         System.out.println(list);
         */
+
         return mav;
     }
 

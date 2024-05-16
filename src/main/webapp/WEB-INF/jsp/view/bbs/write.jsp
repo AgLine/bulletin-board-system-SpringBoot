@@ -36,8 +36,8 @@ function fn_writeClick(){
         url:"<c:url value='/bbs/writeAction'/>",
         data:parameters ,
         success:function(data){
-            alert(data.result);
-            //location.href = "/bbs/list";
+            alert("작성완료");
+            location.href = "/bbs/list";
         }
     });
 }

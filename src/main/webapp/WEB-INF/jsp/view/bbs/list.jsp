@@ -87,21 +87,19 @@ function fn_writeClick(){
                     <th>작성일자</th>
                 </tr>
             </thead>
-            <tfoot>
-                <tr>
-                    <th>번호</th>
-                    <th>제목</th>
-                    <th>작성자</th>
-                    <th>작성일자</th>
-                </tr>
-            </tfoot>
             <tbody>
-                <tr>
-                    <td>Tiger Nixon</td>
-                    <td>System Architect</td>
-                    <td>Edinburgh</td>
-                    <td>61</td>
-                </tr>
+                <c:choose>
+                    <c:when test="${fn:length(resultList) > 0}">
+                        <c:forEach items="${resultList}" var="item">
+                            <tr>
+                                <td>${item.bbsId}</td>
+                                <td>${item.bbsTitle}</td>
+                                <td>${item.bbsName}</td>
+                                <td>${item.bbsDate}</td>
+                            </tr>
+                        </c:forEach>
+                    </c:when>
+                </c:choose>
             </tbody>
         </table>
         <button onclick="fn_writeClick();" class="btn btn-primary btn-block">글쓰기</button>

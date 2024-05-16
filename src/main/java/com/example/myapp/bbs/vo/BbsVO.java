@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class BbsVO {
 
-    private Integer bbsID;
+    private Integer bbsId;
     private String bbsContent;
     private String bbsTitle;
     private String bbsDate;
