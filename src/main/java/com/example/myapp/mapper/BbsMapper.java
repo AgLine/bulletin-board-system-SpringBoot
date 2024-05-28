@@ -27,4 +27,9 @@ public interface BbsMapper {
     게시글 Insert
     */
     void writeInsert(BbsVO bbsVO);
+
+    /*
+    게시글 단건 조회
+    */
+    BbsVO selectByBbsId(BbsVO bbsVO);
 }

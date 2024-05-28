@@ -35,7 +35,6 @@ public class BbsSvcImpl implements BbsSvc {
     */
     @Override
     public int idCnt(UserVO userVO){
-
         return bbsMapper.idCnt(userVO);
     }
 
@@ -43,5 +42,15 @@ public class BbsSvcImpl implements BbsSvc {
     게시글 Insert
     */
     @Override
-    public void writeInsert(BbsVO bbsVO){bbsMapper.writeInsert(bbsVO);}
+    public void writeInsert(BbsVO bbsVO){
+        bbsMapper.writeInsert(bbsVO);
+    }
+
+    /*
+    게시글 단건 조회
+    */
+    @Override
+    public BbsVO selectByBbsId(BbsVO bbsVO){
+        return bbsMapper.selectByBbsId(bbsVO);
+    }
 }

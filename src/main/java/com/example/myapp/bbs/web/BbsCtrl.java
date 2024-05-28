@@ -1,5 +1,6 @@
 package com.example.myapp.bbs.web;
 
+
 import com.example.myapp.bbs.svc.BbsSvc;
 import com.example.myapp.bbs.vo.BbsVO;
 import com.example.myapp.bbs.vo.UserVO;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.ui.Model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -114,6 +116,24 @@ public class BbsCtrl {
         //System.out.println(bbsVO);
         return resultMap;
     }
+
+    /*
+    글 보는 페이지
+    */
+    @GetMapping("/bbs/posting")
+    public ModelAndView postingPage(HttpServletRequest request, @RequestParam("bbsId") String id, Model model){
+        ModelAndView mav = new ModelAndView(request.getRequestURI());
+        BbsVO bbsVO = new BbsVO();
+        bbsVO.setBbsId(id);
+        bbsVO = bbsSvc.selectByBbsId(bbsVO);
+
+        model.addAttribute("bbsVO", bbsVO);
+
+        //System.out.println(bbsVO);
+        return mav;
+    }
+
+
     /*
     부트스트랩 테스트페이지
     */

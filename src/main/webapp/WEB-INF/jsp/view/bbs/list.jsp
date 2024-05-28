@@ -78,7 +78,7 @@ function fn_writeClick(){
         List
     </div>
     <div class="card-body">
-        <table id="datatablesSimple">
+        <table id="datatablesSimple" class="datatable-table">
             <thead>
                 <tr>
                     <th>번호</th>
@@ -91,7 +91,7 @@ function fn_writeClick(){
                 <c:choose>
                     <c:when test="${fn:length(resultList) > 0}">
                         <c:forEach items="${resultList}" var="item">
-                            <tr>
+                            <tr style="cursor:pointer;" onclick="location.href='/bbs/posting?bbsId=${item.bbsId}'">
                                 <td>${item.bbsId}</td>
                                 <td>${item.bbsTitle}</td>
                                 <td>${item.bbsName}</td>

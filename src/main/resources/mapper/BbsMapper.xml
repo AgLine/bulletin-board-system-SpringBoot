@@ -9,7 +9,8 @@
              , BBSDATE
              , BBSNAME
              , BBSAVAILABLE
-        FROM BBS
+          FROM BBS
+         WHERE BBSAVAILABLE = '1'
     </select>
 
     <!--user insert-->
@@ -56,4 +57,16 @@
         , 1
         )
     </insert>
+
+    <!--게시글 단건 조회-->
+    <select id="selectByBbsId" resultType="com.example.myapp.bbs.vo.BbsVO">
+        SELECT BBSID
+             , BBSTITLE
+             , BBSCONTENT
+             , BBSDATE
+             , BBSNAME
+             , BBSAVAILABLE
+          FROM BBS
+        WHERE BBSID = #{bbsId}
+    </select>
 </mapper>
